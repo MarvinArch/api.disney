@@ -21,7 +21,15 @@ public class CharacterRest {
                                        @RequestParam (value = "age", required = false )  String age,
                                        @RequestParam (value = "movies", required = false )  String idMovie){
 
-        return characterService.findAll();
+        if (name!=null){
+            return characterService.findName(name);
+        } else if (age!=null) {
+            return characterService.findByAge(age);
+        } else if (idMovie!=null) {
+            return characterService.findAll();
+        }else{
+            return characterService.findAll();
+        }
 
     }
     @PostMapping("")
@@ -36,8 +44,5 @@ public class CharacterRest {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("name={nombre}")
-    public List<CharacterModel> getSearch(@PathVariable String nombre){
-        return characterService.findByName(nombre);
-    }
+
 }

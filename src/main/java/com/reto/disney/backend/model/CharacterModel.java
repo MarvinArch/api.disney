@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class CharacterModel {
     @JsonIgnore
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
+    @GeneratedValue (strategy = GenerationType.TABLE)
     private Long id;
     private String name;
     private String image;

@@ -19,6 +19,10 @@ public class CharacterService {
         return characterRepository.findAll();
     }
 
+    public List<CharacterModel> findName(String name) {
+        return findAll().stream().filter(x-> x.getName().equalsIgnoreCase(name)).collect(Collectors.toList());
+    }
+
     public CharacterModel save(CharacterModel characterModel) {
         return characterRepository.save(characterModel);
     }
@@ -29,5 +33,12 @@ public class CharacterService {
 
     public List<CharacterModel> findByName(String name) {
         return characterRepository.findAll().stream().filter(x -> x.getName().equalsIgnoreCase(name)).collect(Collectors.toList());
+    }
+    public List<CharacterModel> findByAge(String age) {
+        return characterRepository.findAll().stream().filter(x -> x.getAge()==Integer.parseInt(age)).collect(Collectors.toList());
+    }
+    //pendiente
+    public List<CharacterModel> findByIdMovie(String age) {
+        return characterRepository.findAll().stream().filter(x -> x.getAge()==Integer.parseInt(age)).collect(Collectors.toList());
     }
 }
