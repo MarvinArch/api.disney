@@ -27,6 +27,10 @@ public class MovieSeriesModel {
         Genre = genre;
     }
 
+    public MovieSeriesModel(Long id) {
+        this.id = id;
+    }
+
     public MovieSeriesModel() {
     }
 

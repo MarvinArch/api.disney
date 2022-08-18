@@ -1,5 +1,6 @@
 package com.reto.disney.backend.Controller;
 
+import com.reto.disney.backend.DTO.CharacterDTO;
 import com.reto.disney.backend.Repository.CharacterRepository;
 import com.reto.disney.backend.Service.CharacterService;
 import com.reto.disney.backend.model.CharacterModel;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,9 +24,9 @@ public class CharacterRest {
                                        @RequestParam (value = "movies", required = false )  String idMovie){
 
         if (name!=null){
-            return characterService.findName(name);
+            return getAllParam(characterService.findName(name));
         } else if (age!=null) {
-            return characterService.findByAge(age);
+            return getAllParam(characterService.findByAge(age));
         } else if (idMovie!=null) {
             return characterService.findAll();
         }else{
@@ -32,6 +34,13 @@ public class CharacterRest {
         }
 
     }
+
+    public List<CharacterModel> getAllParam(List<CharacterModel> characterModel){
+        List<CharacterModel> lista= new ArrayList<>();
+        characterModel.stream().forEach(x-> lista.add(new CharacterDTO(x.getImage(), x.getName())));
+        return lista;
+    }
+
     @PostMapping("")
     public ResponseEntity<CharacterModel> newCharacter(@RequestBody CharacterModel characterModel){
         return new ResponseEntity<>(characterService.save(characterModel), HttpStatus.CREATED);

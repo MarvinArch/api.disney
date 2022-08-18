@@ -29,6 +29,10 @@ public class CharacterModel {
         this.weight = weight;
     }
 
+    public CharacterModel(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
