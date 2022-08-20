@@ -25,12 +25,12 @@ public class CharacterModel {
             joinColumns = @JoinColumn(name = "fk_character_id"),
             inverseJoinColumns = @JoinColumn(name = "fk_movie_id")
     )
-    private Set<CharacterMovieModel> movies;
+    private Set<MovieSeriesModel> movies;
 
     public CharacterModel() {
     }
 
-    public CharacterModel(Long id, String name, String image, int age, String history, int weight, Set<CharacterMovieModel> movies) {
+    public CharacterModel(Long id, String name, String image, int age, String history, int weight, Set<MovieSeriesModel> movies) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -92,11 +92,11 @@ public class CharacterModel {
         this.weight = weight;
     }
 
-    public Set<CharacterMovieModel> getMovies() {
+    public Set<MovieSeriesModel> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<CharacterMovieModel> movies) {
+    public void setMovies(Set<MovieSeriesModel> movies) {
         this.movies = movies;
     }
 }

@@ -1,7 +1,11 @@
 package com.reto.disney.backend.model;
 
+import com.reto.disney.backend.DTO.CharacterDTO;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,15 +24,18 @@ public class MovieSeriesModel {
     @JoinColumn(name = "name_genre")
     GenreModel Genre;
     @ManyToMany(mappedBy = "movies")
-    private Set<CharacterModel> characters;
 
-    public MovieSeriesModel(Long id, String img, String title, Date creationDate, double qualification, GenreModel genre) {
+    private List<CharacterModel> characters= new ArrayList<>();
+
+
+    public MovieSeriesModel(Long id, String img, String title, Date creationDate, double qualification, GenreModel genre, List<CharacterModel> characters) {
         this.id = id;
         this.img = img;
         this.title = title;
         this.creationDate = creationDate;
         this.qualification = qualification;
         Genre = genre;
+        this.characters = characters;
     }
 
     public MovieSeriesModel(Long id) {
@@ -84,5 +91,13 @@ public class MovieSeriesModel {
 
     public void setGenre(GenreModel genre) {
         Genre = genre;
+    }
+
+    public List<CharacterModel> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(List<CharacterModel> characters) {
+        this.characters = characters;
     }
 }
