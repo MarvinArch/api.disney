@@ -3,12 +3,15 @@ package com.reto.disney.backend.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table (name = "characters")
 public class CharacterModel {
     @JsonIgnore
     @Id
+    @Column(name = "character_id")
     @GeneratedValue (strategy = GenerationType.TABLE)
     private Long id;
     private String name;
@@ -16,17 +19,25 @@ public class CharacterModel {
     private int age;
     private String history;
     private int weight;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "character_movie",
+            joinColumns = @JoinColumn(name = "fk_character_id"),
+            inverseJoinColumns = @JoinColumn(name = "fk_movie_id")
+    )
+    private Set<CharacterMovieModel> movies;
 
     public CharacterModel() {
     }
 
-    public CharacterModel(Long id, String name, String image, int age, String history, int weight) {
+    public CharacterModel(Long id, String name, String image, int age, String history, int weight, Set<CharacterMovieModel> movies) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.age = age;
         this.history = history;
         this.weight = weight;
+        this.movies = movies;
     }
 
     public CharacterModel(Long id) {
@@ -79,5 +90,13 @@ public class CharacterModel {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public Set<CharacterMovieModel> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<CharacterMovieModel> movies) {
+        this.movies = movies;
     }
 }

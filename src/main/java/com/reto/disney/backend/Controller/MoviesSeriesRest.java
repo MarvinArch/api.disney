@@ -23,20 +23,35 @@ public class MoviesSeriesRest {
     public List<MovieSeriesModel> getAllMovies(){
         return movieSeriesService.findAll();
     }
-
+    //Crear Nueva pelicula
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public MovieSeriesModel saveMovies(@RequestBody MovieSeriesModel movieSeriesModel ){
         return movieSeriesService.save(movieSeriesModel);
     }
+    //Editar Pelicula
 
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("")
+    public MovieSeriesModel updateMovie(@RequestBody MovieSeriesModel movie){
+        return movieSeriesService.updateByMovie(movie);
+    }
+
+    //Eliminar Pelicula
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @DeleteMapping("/{idMovie}")
+    public void deleteMovie(@PathVariable Long idMovie){
+        movieSeriesService.deleteById(idMovie);
+    }
+    //Agregar Personaje a pelicula
     @PostMapping("/{idMovie}/characters/{idCharacter}")
     public CharacterMovieModel newCharacterMovie(@PathVariable Long idMovie, @PathVariable Long idCharacter){
         return characterMovieService.save(new CharacterMovieModel(new CharacterModel(idCharacter), new MovieSeriesModel(idMovie)));
     }
-
+    //Mostrara todas las peliculas y personaje
     @GetMapping("/series/characters")
     public List<CharacterMovieModel> getAll(){
         return characterMovieService.findAll();
     }
+
 }

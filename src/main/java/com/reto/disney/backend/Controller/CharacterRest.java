@@ -2,6 +2,7 @@ package com.reto.disney.backend.Controller;
 
 import com.reto.disney.backend.DTO.CharacterDTO;
 import com.reto.disney.backend.Repository.CharacterRepository;
+import com.reto.disney.backend.Service.CharacterMovieService;
 import com.reto.disney.backend.Service.CharacterService;
 import com.reto.disney.backend.model.CharacterModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 public class CharacterRest {
     @Autowired
     private CharacterService characterService;
+    @Autowired
+    private CharacterMovieService characterMovieService;
     @GetMapping("")
     public List<CharacterModel> getAll(@RequestParam (value = "name", required = false )  String name,
                                        @RequestParam (value = "age", required = false )  String age,

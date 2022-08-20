@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieSeriesService {
@@ -18,5 +19,14 @@ public class MovieSeriesService {
 
     public MovieSeriesModel save(MovieSeriesModel movieSeriesModel) {
         return movieSerieRepository.save(movieSeriesModel);
+    }
+
+    public void deleteById(Long idMovie) {
+        movieSerieRepository.deleteById(idMovie);
+    }
+
+
+    public MovieSeriesModel updateByMovie(MovieSeriesModel movie) {
+        return movieSerieRepository.save(movie);
     }
 }

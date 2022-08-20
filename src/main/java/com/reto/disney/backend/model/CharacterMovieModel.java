@@ -9,13 +9,15 @@ import javax.persistence.*;
 @Table(name = "character_movie")
 public class CharacterMovieModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    @OneToOne
-    @JoinColumn(name = "id_character")
+
+    @ManyToOne
+    @JoinColumn(name = "fk_character_id", referencedColumnName = "character_id", insertable = true, updatable = false)
     private CharacterModel characterModel;
-    @OneToOne
-    @JoinColumn(name = "id_movie")
+
+    @ManyToOne
+    @JoinColumn(name = "fk_movie_id", referencedColumnName = "movie_id", insertable = true, updatable = false)
     private MovieSeriesModel movieSeriesModel;
 
     public CharacterMovieModel() {
@@ -26,13 +28,6 @@ public class CharacterMovieModel {
         this.movieSeriesModel = movieSeriesModel;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public CharacterModel getCharacterModel() {
         return characterModel;
@@ -48,5 +43,13 @@ public class CharacterMovieModel {
 
     public void setMovieSeriesModel(MovieSeriesModel movieSeriesModel) {
         this.movieSeriesModel = movieSeriesModel;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -2,12 +2,14 @@ package com.reto.disney.backend.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "movie_serie")
 public class MovieSeriesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "movie_id")
     private Long id;
     private String img;
     private String title;
@@ -17,6 +19,8 @@ public class MovieSeriesModel {
     @OneToOne
     @JoinColumn(name = "name_genre")
     GenreModel Genre;
+    @ManyToMany(mappedBy = "movies")
+    private Set<CharacterModel> characters;
 
     public MovieSeriesModel(Long id, String img, String title, Date creationDate, double qualification, GenreModel genre) {
         this.id = id;

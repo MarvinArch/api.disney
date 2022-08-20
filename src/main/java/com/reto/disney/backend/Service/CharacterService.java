@@ -2,6 +2,7 @@ package com.reto.disney.backend.Service;
 
 import com.reto.disney.backend.Repository.CharacterRepository;
 import com.reto.disney.backend.model.CharacterModel;
+import com.reto.disney.backend.model.CharacterMovieModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,4 +42,6 @@ public class CharacterService {
     public List<CharacterModel> findByIdMovie(String age) {
         return characterRepository.findAll().stream().filter(x -> x.getAge()==Integer.parseInt(age)).collect(Collectors.toList());
     }
+
+
 }
