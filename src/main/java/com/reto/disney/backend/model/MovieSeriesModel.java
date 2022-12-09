@@ -1,5 +1,7 @@
 package com.reto.disney.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.reto.disney.backend.DTO.CharacterDTO;
 
 import javax.persistence.*;
@@ -24,7 +26,6 @@ public class MovieSeriesModel {
     @JoinColumn(name = "name_genre")
     GenreModel Genre;
     @ManyToMany(mappedBy = "movies")
-
     private List<CharacterModel> characters= new ArrayList<>();
 
 
@@ -93,6 +94,7 @@ public class MovieSeriesModel {
         Genre = genre;
     }
 
+    @JsonBackReference
     public List<CharacterModel> getCharacters() {
         return characters;
     }

@@ -1,6 +1,7 @@
 package com.reto.disney.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,7 +20,7 @@ public class CharacterModel {
     private int age;
     private String history;
     private int weight;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "character_movie",
             joinColumns = @JoinColumn(name = "fk_character_id"),
@@ -91,7 +92,7 @@ public class CharacterModel {
     public void setWeight(int weight) {
         this.weight = weight;
     }
-
+@JsonManagedReference
     public Set<MovieSeriesModel> getMovies() {
         return movies;
     }
