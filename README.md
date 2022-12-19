@@ -12,12 +12,12 @@
 
 > | GET | https://apidisney-production.up.railway.app/characters?age=12
 
-##INGRESO DE NUEVO PERSONAJE
+### INGRESO DE NUEVO PERSONAJE
 > | POST | https://apidisney-production.up.railway.app/characters
 
 
 
-####JSON　
+#### JSON　
 
 ```javascript
 {
@@ -29,11 +29,11 @@
 }
 ```
 
-##INGRESO DE NUEVO GENERO
+### INGRESO DE NUEVO GENERO
 > | POST | https://apidisney-production.up.railway.app/genre
 
 
-####JSON　
+#### JSON　
 
 ```javascript
 {
@@ -43,11 +43,11 @@
 ```
 
 
-##INGRESO DE NUEVO PELICULA/SERIE
+### INGRESO DE NUEVO PELICULA/SERIE
 > | POST | https://apidisney-production.up.railway.app/movies
 
 
-####JSON　
+#### JSON　
 
 ```javascript
 {
