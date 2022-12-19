@@ -1,7 +1,6 @@
 package com.reto.disney.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.reto.disney.backend.DTO.CharacterDTO;
 
 import javax.persistence.*;
@@ -11,10 +10,11 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "movie_serie")
 public class MovieSeriesModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movie_id")
     private Long id;
     private String img;
@@ -25,7 +25,8 @@ public class MovieSeriesModel {
     @OneToOne
     @JoinColumn(name = "name_genre")
     GenreModel Genre;
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany(mappedBy = "movies", cascade = CascadeType.MERGE)
+    @JsonIgnoreProperties("movies")
     private List<CharacterModel> characters= new ArrayList<>();
 
 
@@ -94,7 +95,6 @@ public class MovieSeriesModel {
         Genre = genre;
     }
 
-    @JsonBackReference
     public List<CharacterModel> getCharacters() {
         return characters;
     }

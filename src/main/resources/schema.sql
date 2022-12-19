@@ -1,10 +1,10 @@
 CREATE TABLE characters(
-    character_id LONG NOT NULL AUTO_INCREMENT,
+    character_id LONG AUTO_INCREMENT,
     name VARCHAR(75) NOT NULL,
-    image VARCHAR(200),
-    age INTEGER,
-    history TEXT,
-    weight INTEGER,
+    image VARCHAR(200) NULL,
+    age INTEGER NULL,
+    history TEXT NULL,
+    weight INTEGER NULL,
     CONSTRAINT PK_CHARACTERS PRIMARY KEY(character_id)
 );
 
@@ -26,7 +26,7 @@ CREATE TABLE movie_serie(
 );
 
 CREATE TABLE character_movie(
-    id LONG NOT NULL AUTO_INCREMENT,
+    id LONG AUTO_INCREMENT,
     fk_character_id  LONG NOT NULL,
     fk_movie_id LONG NOT NULL,
     CONSTRAINT PK_CHARACTERS_MOVIE PRIMARY KEY(id),

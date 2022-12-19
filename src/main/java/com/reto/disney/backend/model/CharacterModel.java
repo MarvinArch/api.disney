@@ -1,7 +1,7 @@
 package com.reto.disney.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,19 +13,20 @@ public class CharacterModel {
     @JsonIgnore
     @Id
     @Column(name = "character_id")
-    @GeneratedValue (strategy = GenerationType.TABLE)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String image;
     private int age;
     private String history;
     private int weight;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "character_movie",
             joinColumns = @JoinColumn(name = "fk_character_id"),
             inverseJoinColumns = @JoinColumn(name = "fk_movie_id")
     )
+    @JsonIgnoreProperties("characters")
     private Set<MovieSeriesModel> movies;
 
     public CharacterModel() {
@@ -39,6 +40,15 @@ public class CharacterModel {
         this.history = history;
         this.weight = weight;
         this.movies = movies;
+    }
+
+    public CharacterModel(Long id, String name, String image, int age, String history, int weight) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.age = age;
+        this.history = history;
+        this.weight = weight;
     }
 
     public CharacterModel(Long id) {
@@ -92,12 +102,24 @@ public class CharacterModel {
     public void setWeight(int weight) {
         this.weight = weight;
     }
-@JsonManagedReference
     public Set<MovieSeriesModel> getMovies() {
         return movies;
     }
 
     public void setMovies(Set<MovieSeriesModel> movies) {
         this.movies = movies;
+    }
+
+    @Override
+    public String toString() {
+        return "CharacterModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", age=" + age +
+                ", history='" + history + '\'' +
+                ", weight=" + weight +
+                ", movies=" + movies +
+                '}';
     }
 }

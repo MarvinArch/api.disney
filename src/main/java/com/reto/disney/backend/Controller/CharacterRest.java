@@ -27,9 +27,9 @@ public class CharacterRest {
                                        @RequestParam (value = "movies", required = false )  String idMovie){
 
         if (name!=null){
-            return getAllParam(characterService.findName(name));
+            return characterService.findName(name);
         } else if (age!=null) {
-            return getAllParam(characterService.findByAge(age));
+            return characterService.findByAge(age);
         } else if (idMovie!=null) {
             return characterService.findAll();
         }else{
@@ -40,12 +40,13 @@ public class CharacterRest {
 
     public List<CharacterModel> getAllParam(List<CharacterModel> characterModel){
         List<CharacterModel> lista= new ArrayList<>();
-        characterModel.stream().forEach(x-> lista.add(new CharacterDTO(x.getImage(), x.getName())));
-        return lista;
+        //characterModel.stream().forEach(x-> lista.add(new CharacterDTO(x.getImage(), x.getName())));
+        return characterModel;
     }
 
     @PostMapping("")
     public ResponseEntity<CharacterModel> newCharacter(@RequestBody CharacterModel characterModel){
+        System.out.println(characterModel.toString());
         return new ResponseEntity<>(characterService.save(characterModel), HttpStatus.CREATED);
     }
 
